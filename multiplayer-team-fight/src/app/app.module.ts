@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ClickButtonComponent } from './game/click-button/click-button.component';
 import { CockpitComponent } from './cockpit/cockpit.component';
+import {DropdownModule} from "primeng/dropdown";
 
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}}
 @NgModule({
@@ -34,7 +35,8 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}}
     FormsModule,
     ButtonModule,
     InputTextModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
