@@ -8,7 +8,6 @@ import {TeamsList} from "../teams-list";
   styleUrls: ['./start.component.css']
 })
 export class StartComponent {
-  teamList: TeamsList;
   constructor(private router: Router) {
   }
 }
