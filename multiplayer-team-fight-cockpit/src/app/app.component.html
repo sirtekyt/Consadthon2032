@@ -1,7 +1,7 @@
 <div class="button-container">
-  <button class="btn btn-start">Start Game</button>
-  <button class="btn btn-stop">Stop Game</button>
+  <button class="btn btn-start" (click)="startTimer()">Start Game</button>
+  <button class="btn btn-stop" (click)="stopTimer()">Stop Game</button>
 </div>
 <div class="timer-container">
-  <div class="timer">00:00</div>
+  <div class="timer">{{ formattedTime }}</div>
 </div>
