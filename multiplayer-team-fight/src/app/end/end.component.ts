@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-end',
+  selector: 'game-over',
   templateUrl: './end.component.html',
   styleUrls: ['./end.component.css']
 })
