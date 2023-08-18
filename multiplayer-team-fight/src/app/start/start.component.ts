@@ -33,6 +33,6 @@ export class StartComponent implements OnInit {
     this.socketService.sendStartMessage(this.message);
     await this.socketService.getStartMessage();
 
-    // this.router.navigate(['/lobby'])
+    //this.router.navigate(['/lobby'])
   }
 }
