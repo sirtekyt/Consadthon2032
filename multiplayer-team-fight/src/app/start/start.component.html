@@ -6,14 +6,13 @@
     <div class="flex align-center text-2xl font-thin border-round mb-6">
       Wpisz swoje nickname i zespół dla którego chcesz walczyć.
     </div>
-    </div>
-    <span class="p-float-label">
-      <input pInputText id="username">
-      <label htmlFor="username">Username</label>
-    </span>
+  </div>
+  <span class="p-float-label">
+    <input pInputText id="username" required [(ngModel)]="username">
+    <label htmlFor="username">Username</label>
+  </span>
 
-
-  <p-dropdown [options]="teamList" [(ngModel)]="selectedTeam" optionLabel="name" [filter]="true" filterBy="name" class="mt-4" [showClear]="true" placeholder="Wybierz zespół">
+  <p-dropdown [options]="teamList" [(ngModel)]="selectedTeam" optionLabel="name" [filter]="true" filterBy="name" class="mt-4" [showClear]="true" placeholder="Wybierz zespół" required [(ngModel)]="selectedTeam">
     <ng-template pTemplate="selectedItem">
       <div class="flex align-items-center gap-2" *ngIf="selectedTeam">
         <div>{{ selectedTeam.name }}</div>
@@ -21,5 +20,5 @@
     </ng-template>
   </p-dropdown>
 
-  <p-button (onClick)="sendMsg()" class="mt-5" label="Graj"></p-button>
+  <p-button (onClick)="sendMsg()" class="mt-5" label="Graj" [disabled]="!username || !selectedTeam"></p-button>
 </div>

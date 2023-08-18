@@ -13,6 +13,7 @@ import {WebsocketService} from "../services/websocket.service";
 export class StartComponent implements OnInit, OnDestroy {
   teamList: any[] | undefined;
   selectedTeam: TeamParam;
+  username: string='';
   content = '';
   message: Message;
 
@@ -31,8 +32,8 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   async sendMsg() {
-    this.message.username="Baska";
-    this.message.team= TeamsList.pop();
+    this.message.username=this.username;
+    this.message.team= this.selectedTeam;
     this.message.type= 'joinTeam';
     this.socketService.sendStartMessage(this.message);
     await this.socketService.getStartMessage();
