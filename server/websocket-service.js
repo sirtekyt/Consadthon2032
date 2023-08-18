@@ -1,63 +1,24 @@
-const WebSocket = require('ws');
-
-const wss = new WebSocket.Server({ port: 5000 });
+const app = require('express')();
+const http = require('http').createServer(app);
 const { TeamsList } = require('./team-list');
+const io = require('socket.io')(http, {
+    cors: { origin: "*" }
+});
 
-wss.on('connection', (ws) => {
-    console.log('Client connected');
+let players = [];
 
-    ws.on('message', (message) => {
-        try {
-            const parsedMessage = JSON.parse(message);
-            console.log(message);
 
-            // Echo the received message back to the client
-            ws.send(message);
+io.on('connection', (socket) => {
+    console.log('a player connected');
 
-            if (parsedMessage.type === 'joinTeam') {
-                TeamsList[parsedMessage.team].push(ws);
-
-                const response = {
-                    msg: 'Success',
-                    error: false,
-                    team: parsedMessage.team,
-                };
-
-                ws.send(JSON.stringify(response));
-            }
-
-        } catch (e) {
-            console.error(e);
-        }
+    socket.on('message', (message) =>     {
+        console.log(message);
+        io.emit('message', `${message}`);
     });
-let timerInterval;
 
-    ws.on('close', () => {
-        console.log('Client disconnected');
+    socket.on('disconnect', (socket) => {
+        console.log('a player disconnected');
     });
 });
 
-function startTimer() {
-    if (!timerInterval) {
-        let seconds = 0;
-
-        timerInterval = setInterval(() => {
-            seconds++;
-            const response = {
-                type: 'timerUpdate',
-                time: seconds
-            };
-
-            broadcastMessage(JSON.stringify(response));
-        }, 1000);
-    }
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    const response = {
-        type: 'timerStopped'
-    };
-    broadcastMessage(JSON.stringify(response));
-}
+http.listen(6969, () => console.log('listening on http://localhost:6969') );
