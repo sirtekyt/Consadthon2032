@@ -24,7 +24,7 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.socketService.disconnect();
+
   }
 
   ngOnInit() {

@@ -12,7 +12,7 @@
     <label htmlFor="username">Username</label>
   </span>
 
-  <p-dropdown [options]="teamList" [(ngModel)]="selectedTeam" optionLabel="name" [filter]="true" filterBy="name" class="mt-4" [showClear]="true" placeholder="Wybierz zespół" required [(ngModel)]="selectedTeam">
+  <p-dropdown [options]="teamList" optionLabel="name" [filter]="true" filterBy="name" class="mt-4" [showClear]="true" placeholder="Wybierz zespół" required [(ngModel)]="selectedTeam">
     <ng-template pTemplate="selectedItem">
       <div class="flex align-items-center gap-2" *ngIf="selectedTeam">
         <div>{{ selectedTeam.name }}</div>
