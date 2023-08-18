@@ -17,12 +17,11 @@ export class AppComponent {
   sent = [];
   message: Message;
 
-  constructor(private WebsocketService: WebsocketService, private router: Router) {
+  constructor(private WebsocketService: WebsocketService) {
     WebsocketService.messages.subscribe(msg => {
       this.received.push(msg);
       console.log("Response from websocket: " + JSON.stringify(msg.team));
     });
-    this.router.navigate(['/game-start']);
   }
 
   sendMsg() {
