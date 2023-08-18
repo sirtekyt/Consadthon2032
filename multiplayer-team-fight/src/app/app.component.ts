@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from "./services/websocket.service";
+import { Message } from "./message";
 
 @Component({
   selector: "app-root",
@@ -13,23 +14,20 @@ export class AppComponent {
   content = '';
   received = [];
   sent = [];
+  message: Message;
 
   constructor(private WebsocketService: WebsocketService) {
     WebsocketService.messages.subscribe(msg => {
       this.received.push(msg);
-      console.log("Response from websocket: " + msg);
+      console.log("Response from websocket: " + JSON.stringify(msg.team));
     });
+
   }
 
   sendMsg() {
-    let message = {
-      source: '',
-      content: ''
-    };
-    message.source = 'localhost';
-    message.content = this.content;
-
-    this.sent.push(message);
-    this.WebsocketService.messages.next(message);
+    this.message.source = 'localhost';
+    this.message.content = this.content;
+    this.sent.push(this.message);
+    this.WebsocketService.messages.next(this.message);
   }
 }
