@@ -32,7 +32,5 @@ export class StartComponent implements OnInit {
     this.message.type= 'joinTeam';
     this.socketService.sendStartMessage(this.message);
     await this.socketService.getStartMessage();
-
-    //this.router.navigate(['/lobby'])
   }
 }
