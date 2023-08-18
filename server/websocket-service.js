@@ -30,9 +30,34 @@ wss.on('connection', (ws) => {
             console.error(e);
         }
     });
-
+let timerInterval;
 
     ws.on('close', () => {
         console.log('Client disconnected');
     });
 });
+
+function startTimer() {
+    if (!timerInterval) {
+        let seconds = 0;
+
+        timerInterval = setInterval(() => {
+            seconds++;
+            const response = {
+                type: 'timerUpdate',
+                time: seconds
+            };
+
+            broadcastMessage(JSON.stringify(response));
+        }, 1000);
+    }
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    const response = {
+        type: 'timerStopped'
+    };
+    broadcastMessage(JSON.stringify(response));
+}
