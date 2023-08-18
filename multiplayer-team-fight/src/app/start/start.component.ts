@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {TeamParam, Teams} from "../teams-list";
+import {TeamParam, Teams, TeamsList} from "../teams-list";
 import {Message} from "../message";
 import {WebsocketService} from "../services/websocket.service";
 
@@ -25,11 +25,15 @@ export class StartComponent implements OnInit {
       this.received.push(msg);
       console.log("Response from websocket: " + JSON.stringify(msg.team));
     });
-
+    this.message = <Message>{};
   }
 
   ngOnInit() {
     this.teamList = Teams;
+
+    this.message.content="123";
+    this.message.team= TeamsList.pop();
+    this.message.type= 'joinTeam';
   }
 
   sendMsg() {
