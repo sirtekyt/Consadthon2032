@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-end',
   templateUrl: './end.component.html',
-  styleUrls: ['./end.component.css']
+  styles: []
 })
 export class EndComponent {
   constructor(private router:Router) {
