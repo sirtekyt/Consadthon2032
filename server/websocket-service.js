@@ -1,12 +1,8 @@
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 5000 });
+import {TeamsList} from "./team-list";
 
-const teams = {
-    A: [],
-    B: [],
-    C: [],
-}
 
 wss.on('connection', (ws) => {
     console.log('Client connected');
@@ -19,7 +15,7 @@ wss.on('connection', (ws) => {
             ws.send(message);
 
             if (parsedMessage.type === 'joinTeam') {
-                teams[parsedMessage.team].push(ws);
+                TeamsList[parsedMessage.team].push(ws);
 
                 const response = {
                     msg: 'Success',
