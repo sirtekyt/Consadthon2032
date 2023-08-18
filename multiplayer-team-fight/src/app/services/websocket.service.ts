@@ -17,6 +17,19 @@ export class WebsocketService {
     this.socket = io('http://localhost:6969');
   }
 
+  sendStartMessage(data: Message): void {
+    this.socket.send(data);
+  }
+
+  getStartMessage() {
+    this.socket.on('startGame', (result) => {
+
+      console.log(JSON.stringify(result.result));
+      console.log(result);
+
+    });
+  }
+
   disconnect(): void {
     this.socket.close();
   }
