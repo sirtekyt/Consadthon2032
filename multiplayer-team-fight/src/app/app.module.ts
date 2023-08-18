@@ -13,6 +13,7 @@ import { ResultsComponent } from './results/results.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { ClickButtonComponent } from './game/click-button/click-button.component';
 
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}}
 @NgModule({
@@ -21,7 +22,8 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}}
     StartComponent,
     EndComponent,
     GameComponent,
-    ResultsComponent
+    ResultsComponent,
+    ClickButtonComponent
   ],
   imports: [
     BrowserModule,
