@@ -1,12 +1,7 @@
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 5000 });
-
-const teams = {
-    A: [],
-    B: [],
-    C: [],
-}
+const { TeamsList } = require('./team-list');
 
 wss.on('connection', (ws) => {
     console.log('Client connected');
@@ -19,7 +14,7 @@ wss.on('connection', (ws) => {
             ws.send(message);
 
             if (parsedMessage.type === 'joinTeam') {
-                teams[parsedMessage.team].push(ws);
+                TeamsList[parsedMessage.team].push(ws);
 
                 const response = {
                     msg: 'Success',
@@ -34,9 +29,34 @@ wss.on('connection', (ws) => {
             console.error(e);
         }
     });
-
+let timerInterval;
 
     ws.on('close', () => {
         console.log('Client disconnected');
     });
 });
+
+function startTimer() {
+    if (!timerInterval) {
+        let seconds = 0;
+
+        timerInterval = setInterval(() => {
+            seconds++;
+            const response = {
+                type: 'timerUpdate',
+                time: seconds
+            };
+
+            broadcastMessage(JSON.stringify(response));
+        }, 1000);
+    }
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    const response = {
+        type: 'timerStopped'
+    };
+    broadcastMessage(JSON.stringify(response));
+}

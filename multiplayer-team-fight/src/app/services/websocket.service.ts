@@ -6,12 +6,6 @@ import {Message} from "../message";
 
 const CHAT_URL = "ws://localhost:5000";
 
-export interface teams {
-  A: any[];
-  B: any[];
-  C: any[];
-}
-
 @Injectable()
 export class WebsocketService {
   private subject: AnonymousSubject<MessageEvent>;

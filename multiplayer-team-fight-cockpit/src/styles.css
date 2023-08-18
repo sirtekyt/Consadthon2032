@@ -1,0 +1,8 @@
+body {
+  font-family: var(--font-family);
+  font-family: 'Handjet', cursive;
+  background-color: #352F44;
+  font-weigth: 300;
+  color: #FAF0E6;
+  letter-spacing: 3px;
+}
