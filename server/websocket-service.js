@@ -13,7 +13,10 @@ io.on('connection', (socket) => {
 
     socket.on('message', (message) =>     {
         console.log(message);
-        io.emit('message', `${message}`);
+        socket.emit('startGame', 'Hello from server!');
+        if (message && message.type === 'joinTeam') {
+            socket.emit('startGame', {msg: "Przekierowanie do lobby", result: 1});
+        }
     });
 
     socket.on('disconnect', (socket) => {

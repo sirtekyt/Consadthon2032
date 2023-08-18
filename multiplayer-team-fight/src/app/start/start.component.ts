@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {TeamParam, Teams, TeamsList} from "../teams-list";
 import {Message} from "../message";
@@ -28,13 +28,15 @@ export class StartComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.teamList = Teams;
-
-    this.message.content="123";
-    this.message.team= TeamsList.pop();
-    this.message.type= 'joinTeam';
   }
 
-  sendMsg() {
-    this.router.navigate(['/lobby'])
+  async sendMsg() {
+    this.message.username="Baska";
+    this.message.team= TeamsList.pop();
+    this.message.type= 'joinTeam';
+    this.socketService.sendStartMessage(this.message);
+    await this.socketService.getStartMessage();
+
+    // this.router.navigate(['/lobby'])
   }
 }

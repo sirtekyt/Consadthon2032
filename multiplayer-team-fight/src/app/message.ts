@@ -4,6 +4,7 @@ export interface Message {
   source: string;
   content?: string;
   error?: boolean;
-  team?: TeamParam;
+  team: TeamParam;
+  username: string;
   type?: string;
 }
