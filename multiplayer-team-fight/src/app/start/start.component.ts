@@ -41,5 +41,6 @@ export class StartComponent implements OnInit {
     this.message.content = this.content;
     this.sent.push(this.message);
     this.WebsocketService.messages.next(this.message);
+    this.router.navigate(['/lobby'])
   }
 }

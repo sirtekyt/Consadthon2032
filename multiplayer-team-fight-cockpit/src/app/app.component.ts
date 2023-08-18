@@ -25,7 +25,7 @@ export class AppComponent {
     // Subscribe to WebSocket messages
     this.websocketService.connect().subscribe(
       message => {
-        const parsedMessage = JSON.parse(message.data);
+        const parsedMessage = message.data;
 
         if (parsedMessage.type === 'timerUpdate') {
           this.formattedTime = this.formatTime(parsedMessage.time);
