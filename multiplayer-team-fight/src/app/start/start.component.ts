@@ -7,10 +7,9 @@ import {WebsocketService} from "../services/websocket.service";
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css'],
-  providers: [WebsocketService]
+  styleUrls: ['./start.component.css']
 })
-export class StartComponent implements OnInit, OnDestroy {
+export class StartComponent implements OnInit {
   teamList: any[] | undefined;
   selectedTeam: TeamParam;
   username: string='';
@@ -21,10 +20,6 @@ export class StartComponent implements OnInit, OnDestroy {
               private socketService: WebsocketService
               ) {
     this.message = <Message>{};
-  }
-
-  ngOnDestroy(): void {
-
   }
 
   ngOnInit() {

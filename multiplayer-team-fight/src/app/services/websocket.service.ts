@@ -23,10 +23,7 @@ export class WebsocketService {
 
   getStartMessage() {
     this.socket.on('startGame', (result) => {
-
-      console.log(JSON.stringify(result.result));
       console.log(result);
-
     });
   }
 
