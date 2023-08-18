@@ -1,8 +1,7 @@
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 5000 });
-import {TeamsList} from "./team-list";
-
+const { TeamsList } = require('./team-list');
 
 wss.on('connection', (ws) => {
     console.log('Client connected');

@@ -1,4 +1,4 @@
-export const TeamsList = [
+module.exports.TeamsList = [
     {id: 1, name: "Tarczowniki"},
     {id: 2, name: "Orki"},
     {id: 3, name: "Komando"},
