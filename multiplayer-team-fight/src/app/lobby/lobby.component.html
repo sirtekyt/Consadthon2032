@@ -1,18 +1,15 @@
 <div class="container">
   <div class="center">
     <div class="mb-4 text-8xl font-bold border-round m-2">
-      Placeholder for the game
-    </div>
-    <div class="flex align-center text-2xl font-thin border-round mb-6">
       Lobby
     </div>
+    <div class="flex align-center text-2xl font-thin border-round mb-6">
+      Witamy graczy:
+    </div>
   </div>
-  <span class="p-float-label">
-      <input pInputText id="username" disabled>
-      <label htmlFor="username">Username</label>
-    </span>
-  <span class="p-float-label">
-      <input pInputText id="team" disabled>
-      <label htmlFor="team">Team</label>
-    </span>
+
+  <div class="m-2" *ngFor="let item of items">
+    <p-chip label={{item.username}}></p-chip>
+  </div>
+
 </div>

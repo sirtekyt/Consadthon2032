@@ -1,6 +1,4 @@
 import {Injectable} from "@angular/core";
-import {Observable, Observer} from 'rxjs';
-import {AnonymousSubject} from 'rxjs/internal/Subject';
 import {Subject} from 'rxjs';
 import {Message} from "../message";
 import {io, Socket} from 'socket.io-client';
@@ -30,6 +28,14 @@ export class WebsocketService {
         // Redirect to 'lobby' route
         this.router.navigate(['/lobby']);
       }
+    });
+  }
+
+  getNewPlayersForLobby() {
+    this.socket.on('updatePlayers', (result) => {
+
+      console.log(result);
+
     });
   }
 

@@ -10,17 +10,24 @@ let players = [];
 
 io.on('connection', (socket) => {
     console.log('a player connected');
-
-    socket.on('message', (message) =>     {
+    // Add the connected player to the list
+    // Send the updated list of players to all clients
+    socket.on('message', (message) => {
         console.log(message);
-        socket.emit('startGame', 'Hello from server!');
         if (message && message.type === 'joinTeam') {
-            socket.emit('startGame', {msg: "Przekierowanie do lobby", result: 1});
+            players.push({socketId: socket.id, username: message.username, team: message.team});
+            io.emit('updatePlayers', players);
+
+            socket.emit('startGame', { msg: "Przekierowanie do lobby", result: 1 });
         }
     });
 
     socket.on('disconnect', (socket) => {
         console.log('a player disconnected');
+        // Remove the disconnected player from the list
+        players = players.filter(player => player.socketId !== socket.id);
+        // Send the updated list of players to all clients
+        io.emit('updatePlayers', players);
     });
 });
 
