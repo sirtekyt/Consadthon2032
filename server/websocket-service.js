@@ -9,6 +9,7 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         try {
             const parsedMessage = JSON.parse(message);
+            console.log(message);
 
             // Echo the received message back to the client
             ws.send(message);
