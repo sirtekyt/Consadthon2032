@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from "./services/websocket.service";
 import { Message } from "./message";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -21,7 +22,6 @@ export class AppComponent {
       this.received.push(msg);
       console.log("Response from websocket: " + JSON.stringify(msg.team));
     });
-
   }
 
   sendMsg() {
