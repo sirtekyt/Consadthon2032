@@ -25,7 +25,8 @@ io.on('connection', (socket) => {
 
         // jezeli admin (cockpit)
         if (message && message.type === 'gameStart') {
-            io.emit('gameStart', { msg: "Gra się rozpoczyna", result: 2 });
+            const teamId = message.teamId;
+            io.emit('gameStart', { msg: "Gra się rozpoczyna", result: 2, teamId: teamId });
 
         }
 

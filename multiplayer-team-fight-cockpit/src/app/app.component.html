@@ -5,3 +5,24 @@
 <div class="timer-container">
   <div class="timer">{{ formattedTime }}</div>
 </div>
+
+<!-- Team progress section -->
+<div class="container">
+  <div class="flex justify-between items-center">
+    <div class="text-lg font-medium">
+      Team Progress:
+    </div>
+    <div class="flex space-x-4">
+      <div *ngFor="let team of teams" class="relative">
+        <div class="w-24 h-8 bg-gray-200 rounded-full">
+          <!-- Progress bar -->
+          <div class="h-8 bg-blue-500 rounded-full" [style.width]="team.progress + '%'"></div>
+        </div>
+        <div class="absolute top-0 left-0 w-8 h-8 flex items-center justify-center">
+          <!-- Team name -->
+          {{ team.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {io, Socket} from 'socket.io-client';
-import {Message} from "./Message";  // Import the socket.io-client library
+import {Message} from "./Message";
+import {TeamParam, Teams, TeamsList} from "./team-list";  // Import the socket.io-client library
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,22 @@ export class AppComponent implements OnInit {
   timerInterval: any;
   socket: Socket;
   data: Message;
+  teams;
 
   constructor() {
     this.socket = io('http://localhost:6969');
 
     this.data = <Message> {};
+
+    this.teams=Teams;
+
+    /*this.socket.on('gameStart', (data: Message) => {
+      // Update team progress here based on your logic
+      const teamToUpdate = this.teams.find(team => team.id === data.teamId);
+      if (teamToUpdate) {
+        teamToUpdate.progress += 10; // Update progress by a certain value
+      }
+    });*/
   }
 
 
