@@ -31,11 +31,18 @@ export class WebsocketService {
     });
   }
 
-  getNewPlayersForLobby() {
-    this.socket.on('updatePlayers', (result) => {
-
+  getStartGameMessage() {
+    this.socket.on('gameStart', (result) => {
+      console.warn("gameStart HIT CLIENT")
       console.log(result);
+    })
+  }
 
+  getNewPlayersForLobby() {
+    return this.socket.on('updatePlayers', (result) => {
+
+      // TODO: lobby players view
+      // this.items$.subscribe(items => this.itemsPool.push(result));
     });
   }
 
