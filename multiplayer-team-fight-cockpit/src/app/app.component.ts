@@ -22,13 +22,6 @@ export class AppComponent implements OnInit {
 
     this.teams=Teams;
 
-    /*this.socket.on('gameStart', (data: Message) => {
-      // Update team progress here based on your logic
-      const teamToUpdate = this.teams.find(team => team.id === data.teamId);
-      if (teamToUpdate) {
-        teamToUpdate.progress += 10; // Update progress by a certain value
-      }
-    });*/
   }
 
 
@@ -69,6 +62,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socket.on('teamScoreUpdate', (data) => {
+      console.log(data);
+    });
   }
 
 }

@@ -6,7 +6,10 @@ const io = require('socket.io')(http, {
 });
 
 let players = [];
-let playersScores = [];
+let playersScores = [
+
+];
+let teams = {}; // Object to hold teams and their scores
 let userClickCount = 0;
 
 io.on('connection', (socket) => {
@@ -18,8 +21,11 @@ io.on('connection', (socket) => {
         console.log('players connected:', players.length)
 
         if (message && message.type === 'joinTeam') {
-            players.push({socketId: socket.id, username: message.username, team: message.team});
-            io.emit('updatePlayers', players);
+            const { username, team } = message;
+            if (!teams[team]) {
+                teams[team] = { score: 0, players: [] };
+            }
+            teams[team].players.push({ socketId: socket.id, username });
 
             socket.emit('startGame', { msg: "Przekierowanie do lobby", result: 1 });
         }
@@ -30,21 +36,25 @@ io.on('connection', (socket) => {
             io.emit('gameStart', { msg: "Gra się rozpoczyna", result: 2, teamId: teamId });
         }
 
-        // jezeli user click
-        if(message && message.type === 'click' && message.msg === 'gameStart') {
-            userClickCount++;
-            console.log("otrzymano klikniecie od" + message.username);
-            socket.emit('clickCount', { clicks: userClickCount, team: message.team });
+        if (message && message.type === 'click' && message.msg === 'gameStart') {
+            const team = message.team;
+            if (teams[team]) {
+                teams[team].score++;
+
+            }
+            // wysylamy update tylko cockpit wiec socket a nie io
+            io.emit('teamScoreUpdate', teams);
         }
 
     });
 
     socket.on('disconnect', (socket) => {
         console.log('a player disconnected');
-        // Remove the disconnected player from the list
-        players = players.filter(player => player.socketId !== socket.id);
-        // Send the updated list of players to all clients
-        io.emit('updatePlayers', players);
+        // Remove the disconnected player from the team
+        for (const team in teams) {
+            teams[team].players = teams[team].players.filter(player => player.socketId !== socket.id);
+        }
+        io.emit('updatePlayers', teams);
     });
 });
 
