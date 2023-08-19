@@ -31,6 +31,13 @@ export class WebsocketService {
     });
   }
 
+  getStartGameMessage() {
+    this.socket.on('gameStart', (result) => {
+      console.warn("gameStart HIT CLIENT")
+      console.log(result);
+    })
+  }
+
   getNewPlayersForLobby() {
     return this.socket.on('updatePlayers', (result) => {
 

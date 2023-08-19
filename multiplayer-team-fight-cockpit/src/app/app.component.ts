@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { io, Socket } from 'socket.io-client';  // Import the socket.io-client library
+import {Component, OnInit} from '@angular/core';
+import {io, Socket} from 'socket.io-client';
+import {Message} from "./Message";  // Import the socket.io-client library
 
 @Component({
   selector: 'app-root',
@@ -7,20 +8,19 @@ import { io, Socket } from 'socket.io-client';  // Import the socket.io-client l
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'multiplayer-team-fight-cockpit';
-  formattedTime = '00:30'; // Initialize the timer display to 30 seconds
-  timerInterval: any; // Variable to hold the interval reference
-  socket: any; // Socket instance
+  formattedTime = '00:30';
+  timerInterval: any;
+  socket: Socket;
 
   constructor() {
-    // Connect to the WebSocket server
     this.socket = io('http://localhost:6969');
 
-    // Listen for the 'startGame' event from the server
-    this.socket.on('startGame', (data: any) => {
-      if (data.result === 1) {
-        this.startTimer();
-      }
+    this.socket.on('gameStart', (data: Message) => {
+      // this.startTimer();
+      data.source = "localhost";
+      data.type = "gameStart";
+      this.socket.send(data);
+
     });
   }
 
@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
