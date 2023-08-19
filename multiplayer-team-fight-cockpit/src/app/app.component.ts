@@ -54,8 +54,12 @@ export class AppComponent implements OnInit {
     this.socket.on('endGame', (data) => {
       console.log(data);
       this.gameEnd = true;
-      this.winnersTeamName = Teams.find((team) => team.id === data.teamId).name;
-      this.players = data.team.players;
+      if (!this.winnersTeamName) {
+        this.winnersTeamName = Teams.find((team) => team.id === data.teamId).name;
+      }
+      if (!this.players) {
+        this.players = data.team.players;
+      }
     });
   }
 
