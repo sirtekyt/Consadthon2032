@@ -6,7 +6,7 @@ const io = require('socket.io')(http, {
 });
 
 let players = [];
-let teams = {};
+let teams = [];
 
 io.on('connection', (socket) => {
     console.log('a player connected');

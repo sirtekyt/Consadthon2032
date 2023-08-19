@@ -23,5 +23,5 @@ export const TeamsList = [
 export const Teams: TeamParam[] = TeamsList.map((team) => ({
   id: team.id,
   name: team.name,
-  progress: 150 // Set the initial progress to 0 for each team
+  progress: 0
 }));
