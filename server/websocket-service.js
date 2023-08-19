@@ -14,6 +14,8 @@ io.on('connection', (socket) => {
     // Send the updated list of players to all clients
     socket.on('message', (message) => {
         console.log(message);
+        console.log('players connected:', players.length)
+
         if (message && message.type === 'joinTeam') {
             players.push({socketId: socket.id, username: message.username, team: message.team});
             io.emit('updatePlayers', players);

@@ -9,8 +9,12 @@ import {async, Observable} from "rxjs";
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css']
 })
-export class LobbyComponent {
+export class LobbyComponent implements OnInit {
 
   constructor(private ioService: WebsocketService) {
+  }
+
+  ngOnInit() {
+    this.ioService.getStartGameMessage();
   }
 }

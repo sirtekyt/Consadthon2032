@@ -32,10 +32,13 @@ export class WebsocketService {
   }
 
   getStartGameMessage() {
-    this.socket.on('gameStart', (result) => {
-      console.warn("gameStart HIT CLIENT")
-      console.log(result);
-    })
+    this.socket.on('gameStart', (data) => {
+      console.log(data);
+      if (data.result === 2) {
+        // Redirect to 'lobby' route
+        this.router.navigate(['/game']);
+      }
+    });
   }
 
   getNewPlayersForLobby() {

@@ -11,17 +11,21 @@ export class AppComponent implements OnInit {
   formattedTime = '00:30';
   timerInterval: any;
   socket: Socket;
+  data: Message;
 
   constructor() {
     this.socket = io('http://localhost:6969');
 
-    this.socket.on('gameStart', (data: Message) => {
-      // this.startTimer();
-      data.source = "localhost";
-      data.type = "gameStart";
-      this.socket.send(data);
+    this.data = <Message> {};
+  }
 
-    });
+
+  startGameBtn() {
+    this.data.source = "localhost";
+    this.data.type = "gameStart";
+    this.socket.send(this.data);
+
+
   }
 
   startTimer() {
