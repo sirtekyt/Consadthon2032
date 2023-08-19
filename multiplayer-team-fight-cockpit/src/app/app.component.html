@@ -1,12 +1,4 @@
-<div class="button-container flex flex-row">
-  <button class="btn btn-start" (click)="startGameBtn()">Start Game</button>
-  <button class="btn btn-stop">Stop Game</button>
-</div>
-
-<!-- Team progress section -->
-
 <div *ngIf="gameEnd">
-
   <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
     <div class="text-700 text-center">
       <div class="text-blue-600 font-bold mb-3">SZCZERE</div>
@@ -17,11 +9,14 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
 <div class="container" *ngIf="!gameEnd">
+  <div class="button-container flex flex-row">
+    <button class="btn btn-start" (click)="startGameBtn()">Start Game</button>
+    <button class="btn btn-stop">Stop Game</button>
+  </div>
   <div *ngFor="let team of teams" class="team-item">
     <div class="card">
       <h5>{{team.name}}</h5>
