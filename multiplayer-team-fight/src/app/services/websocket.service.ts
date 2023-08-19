@@ -47,6 +47,14 @@ export class WebsocketService {
     this.socket.send({...this.playerService.player, type: 'click', msg: 'gameStart', clickCount });
   }
 
+  getEndGameRedirect() {
+    this.socket.on('endGame', (data) => {
+      if(data) {
+        window.close();
+      }
+    });
+  }
+
   getNewPlayersForLobby() {
     return this.socket.on('updatePlayers', (result) => {
 
