@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   timerInterval: any;
   socket: Socket;
   data: Message;
+  progressBarValue;
   teams;
 
   constructor() {
@@ -63,7 +64,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.socket.on('teamScoreUpdate', (data) => {
-      console.log(data);
+
+      const updatedTeam = this.teams.find((team) => team.id === data[data.length]);
+
+      console.log(updatedTeam);
+      if (updatedTeam) {
+        // Update the team's progress
+        updatedTeam.progress = data.progress; // Assuming data.progress contains the new progress value
+      }
     });
   }
 
