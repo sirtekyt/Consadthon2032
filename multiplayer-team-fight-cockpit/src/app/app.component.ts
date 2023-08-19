@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
 
     this.teams=Teams;
 
+    this.progressBarValue = 0;
+
   }
 
 
@@ -65,12 +67,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.socket.on('teamScoreUpdate', (data) => {
 
-      const updatedTeam = this.teams.find((team) => team.id === data[data.length]);
+      const teamIdToUpdate = data.length - 1;
+      const updatedTeam = this.teams.find((team) => team.id === teamIdToUpdate);
 
       console.log(updatedTeam);
       if (updatedTeam) {
         // Update the team's progress
-        updatedTeam.progress = data.progress; // Assuming data.progress contains the new progress value
+        this.progressBarValue = updatedTeam.progress;
       }
     });
   }
