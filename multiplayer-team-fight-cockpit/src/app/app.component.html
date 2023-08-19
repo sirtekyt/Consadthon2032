@@ -8,25 +8,13 @@
 
 <!-- Team progress section -->
 <div class="container">
-  <p-progressBar [value]="80"></p-progressBar>
-
-  <div class="team-progress">
-    <div class="text-lg font-medium">
-      Team Progress:
-    </div>
-    <div class="team-bar">
-
-      <div *ngFor="let team of teams" class="team-item">
-        <div class="progress-container">
-          <!-- Progress bar -->
-          <div class="progress-bar" [style.width]="team.progress + '%'"></div>
-        </div>
-        <div class="team-name">
-          <!-- Team name -->
-          {{ team.name }}
-        </div>
-      </div>
+  <div *ngFor="let team of teams" class="team-item">
+    <div class="card">
+      <h5>{{team.name}}</h5>
+      <p-progressBar class="customProgress" [value]="team.progress/10" [showValue]="false"/>
     </div>
   </div>
+
+
 </div>
 
