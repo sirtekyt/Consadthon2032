@@ -64,3 +64,79 @@
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* app.component.css */
+
+/* Apply a general style to the entire page */
+.container {
+  margin: 20px;
+}
+
+/* Styles for team progress section */
+.team-progress {
+  margin-top: 20px;
+}
+
+.team-progress .text-lg {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.team-progress .team-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.team-bar .team-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.team-bar .team-item .progress-container {
+  width: 120px;
+  height: 16px;
+  background-color: #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.team-bar .team-item .progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #3498db;
+  transition: width 0.3s ease-in-out;
+}
+
+.team-bar .team-item .team-name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.team-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+}
+
+.customProgress .ui-progressbar .ui-progressbar-label {
+  color: yellow;
+}
+
+.customProgress .ui-progressbar .ui-progressbar-value {
+  background: red;
+}

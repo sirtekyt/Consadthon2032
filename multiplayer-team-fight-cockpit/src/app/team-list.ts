@@ -2,11 +2,11 @@ export interface TeamParam {
   id: number;
   name: string;
   icon?: string;
-  progress: number; // Add the progress property
+  progress?: number; // Add the progress property
 }
 
 export const TeamsList = [
-  { id: 1, name: "Tarczowniki" },
+  { id: 1, name: "Tarczowniki"},
   { id: 2, name: "Orki" },
   { id: 3, name: "Komando" },
   { id: 4, name: "Ants" },
@@ -23,5 +23,5 @@ export const TeamsList = [
 export const Teams: TeamParam[] = TeamsList.map((team) => ({
   id: team.id,
   name: team.name,
-  progress: 5 // Set the initial progress to 0 for each team
+  progress: 150 // Set the initial progress to 0 for each team
 }));

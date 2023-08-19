@@ -10,7 +10,6 @@ import {async, Observable} from "rxjs";
   styleUrls: ['./lobby.component.css']
 })
 export class LobbyComponent implements OnInit {
-
   constructor(private ioService: WebsocketService) {
   }
 

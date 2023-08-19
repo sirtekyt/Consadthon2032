@@ -41,6 +41,11 @@ export class WebsocketService {
     });
   }
 
+  sendClick() {
+    // tutaj musimy wyslac username, team, i click, ale message z game-start musi byc przeniesiony wyzej
+    this.socket.send({});
+  }
+
   getNewPlayersForLobby() {
     return this.socket.on('updatePlayers', (result) => {
 

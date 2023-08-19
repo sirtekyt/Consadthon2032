@@ -5,3 +5,16 @@
 <div class="timer-container">
   <div class="timer">{{ formattedTime }}</div>
 </div>
+
+<!-- Team progress section -->
+<div class="container">
+  <div *ngFor="let team of teams" class="team-item">
+    <div class="card">
+      <h5>{{team.name}}</h5>
+      <p-progressBar class="customProgress" [value]="team.progress/10" [showValue]="false"/>
+    </div>
+  </div>
+
+
+</div>
+
