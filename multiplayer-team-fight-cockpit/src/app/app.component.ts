@@ -66,15 +66,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.socket.on('teamScoreUpdate', (data) => {
-
-      const teamIdToUpdate = data.length - 1;
-      const updatedTeam = this.teams.find((team) => team.id === teamIdToUpdate);
+      const updatedTeam = this.teams.find((team) => team.id === data.teamId);
 
       if (updatedTeam) {
-        // Update the team's progress
-        updatedTeam.progress = data[teamIdToUpdate].score;
+        updatedTeam.progress = data.teams[data.teamId].score;
         this.progressBarValue = updatedTeam.progress;
-        console.log(updatedTeam);
       }
     });
   }

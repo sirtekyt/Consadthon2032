@@ -48,9 +48,10 @@ io.on('connection', (socket) => {
             const team = message.team;
             if (teams[team.id]) {
                 teams[team.id].score += 10;
+                io.emit('teamScoreUpdate', { teams, teamId: team.id });
             }
             // wysylamy update tylko cockpit wiec socket a nie io
-            io.emit('teamScoreUpdate', teams);
+
         }
 
     });
