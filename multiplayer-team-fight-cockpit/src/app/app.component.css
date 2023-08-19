@@ -125,3 +125,10 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.team-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+}
