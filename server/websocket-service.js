@@ -1,6 +1,6 @@
 const app = require('express')();
 const http = require('http').createServer(app);
-const { TeamsList } = require('./team-list');
+// const { TeamsList } = require('./team-list');
 const io = require('socket.io')(http, {
     cors: { origin: "*" }
 });
