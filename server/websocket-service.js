@@ -6,7 +6,8 @@ const io = require('socket.io')(http, {
 });
 
 let players = [];
-
+let playersScores = [];
+let userClickCount = 0;
 
 io.on('connection', (socket) => {
     console.log('a player connected');
@@ -27,7 +28,13 @@ io.on('connection', (socket) => {
         if (message && message.type === 'gameStart') {
             const teamId = message.teamId;
             io.emit('gameStart', { msg: "Gra się rozpoczyna", result: 2, teamId: teamId });
+        }
 
+        // jezeli user click
+        if(message && message.type === 'click' && message.msg === 'gameStart') {
+            userClickCount++;
+            console.log("otrzymano klikniecie od" + message.username);
+            socket.emit('clickCount', { clicks: userClickCount, team: message.team });
         }
 
     });
