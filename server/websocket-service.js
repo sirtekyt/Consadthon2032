@@ -17,15 +17,32 @@ io.on('connection', (socket) => {
     // Add the connected player to the list
     // Send the updated list of players to all clients
     socket.on('message', (message) => {
-        console.log(message);
-        console.log('players connected:', players.length)
+        // console.log(message);
+        // console.log(message.team.id);
+        // console.log('players connected:', players.length)
 
         if (message && message.type === 'joinTeam') {
-            const { username, team } = message;
-            if (!teams[team]) {
-                teams[team] = { score: 0, players: [] };
+            console.log(message.team.id);
+            let teamId = message.team.id;
+            const { username, team} = message;
+
+            // Check if the player is already connected
+            const existingPlayer = players.find(player => player.socketId === socket.id);
+            if (!existingPlayer) {
+                players.push({ socketId: socket.id, username, teamId: team.id});
             }
-            teams[team].players.push({ socketId: socket.id, username });
+
+            if (!teams[teamId]) {
+                teams[teamId] = { score: 0, players: [] };
+            }
+
+            // Remove the player from any previous team
+            for (const existingTeam in teams) {
+                teams[existingTeam].players = teams[existingTeam].players.filter(player => player.socketId !== socket.id);
+            }
+
+            teams[teamId].players.push({ socketId: socket.id, username });
+            console.log(teams[teamId].players);
 
             socket.emit('startGame', { msg: "Przekierowanie do lobby", result: 1 });
         }
@@ -40,7 +57,7 @@ io.on('connection', (socket) => {
             const team = message.team;
             if (teams[team]) {
                 teams[team].score++;
-
+                console.log(teams[team].score)
             }
             // wysylamy update tylko cockpit wiec socket a nie io
             io.emit('teamScoreUpdate', teams);
