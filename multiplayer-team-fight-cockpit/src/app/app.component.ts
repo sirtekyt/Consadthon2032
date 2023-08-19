@@ -73,6 +73,10 @@ export class AppComponent implements OnInit {
         this.progressBarValue = updatedTeam.progress;
       }
     });
+
+    this.socket.on('endGame', (data) => {
+      console.log(data);
+    });
   }
 
 }

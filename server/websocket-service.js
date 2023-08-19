@@ -8,6 +8,8 @@ const io = require('socket.io')(http, {
 let players = [];
 let teams = [];
 
+let totalGameScore = 0;
+
 io.on('connection', (socket) => {
     console.log('a player connected');
 
@@ -48,12 +50,12 @@ io.on('connection', (socket) => {
             const team = message.team;
             if (teams[team.id]) {
                 teams[team.id].score += 10;
-                io.emit('teamScoreUpdate', { teams, teamId: team.id });
+                if (teams[team.id].score >= 20) {
+                    io.emit('endGame', {msg: "Koniec gry.", team: teams[team.id], teamId: team.id});
+                }
+                io.emit('teamScoreUpdate', {teams, teamId: team.id});
             }
-            // wysylamy update tylko cockpit wiec socket a nie io
-
         }
-
     });
 
     socket.on('disconnect', (socket) => {
