@@ -11,7 +11,10 @@
     <div class="text-700 text-center">
       <div class="text-blue-600 font-bold mb-3">SZCZERE</div>
       <div class="text-900 font-bold text-5xl mb-3">GRATULACJE</div>
-      <div class="text-700 text-2xl mb-5">{{ winnersData.id }}</div>
+      <div class="text-700 text-2xl mb-5">{{ winnersTeamName }}</div>
+      <div *ngFor="let player of players">
+        {{player.username}}
+      </div>
     </div>
   </div>
 
