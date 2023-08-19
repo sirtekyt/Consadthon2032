@@ -8,11 +8,14 @@
 
 <!-- Team progress section -->
 <div class="container">
+  <p-progressBar [value]="80"></p-progressBar>
+
   <div class="team-progress">
     <div class="text-lg font-medium">
       Team Progress:
     </div>
     <div class="team-bar">
+
       <div *ngFor="let team of teams" class="team-item">
         <div class="progress-container">
           <!-- Progress bar -->
