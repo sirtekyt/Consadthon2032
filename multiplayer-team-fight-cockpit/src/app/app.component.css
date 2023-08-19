@@ -132,3 +132,11 @@
   gap: 50px;
 
 }
+
+.customProgress .ui-progressbar .ui-progressbar-label {
+  color: yellow;
+}
+
+.customProgress .ui-progressbar .ui-progressbar-value {
+  background: red;
+}
