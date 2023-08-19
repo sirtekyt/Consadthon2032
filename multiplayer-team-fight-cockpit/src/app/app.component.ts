@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   data: Message;
   progressBarValue;
   teams;
+  gameEnd: boolean;
+  winnersData: any;
 
   constructor() {
     this.socket = io('http://localhost:6969');
@@ -24,6 +26,8 @@ export class AppComponent implements OnInit {
     this.teams=Teams;
 
     this.progressBarValue = 0;
+
+    this.gameEnd = false;
 
   }
 
@@ -75,7 +79,9 @@ export class AppComponent implements OnInit {
     });
 
     this.socket.on('endGame', (data) => {
-      console.log(data);
+      this.gameEnd = true;
+      this.winnersData = data;
+      console.log(this.winnersData);
     });
   }
 
