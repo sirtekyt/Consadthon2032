@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WebsocketService} from "../../services/websocket.service";
 import {PlayerDataService} from "../../services/player.service";
 
@@ -7,7 +7,7 @@ import {PlayerDataService} from "../../services/player.service";
   templateUrl: './click-button.component.html',
   styleUrls: ['./click-button.component.css']
 })
-export class ClickButtonComponent {
+export class ClickButtonComponent implements OnInit {
   clickCount: number = 0;
 
   constructor(private webSocketService: WebsocketService,
@@ -19,5 +19,9 @@ export class ClickButtonComponent {
     if (this.clickCount % 10 === 0) {
       this.webSocketService.sendClick(this.clickCount);
     }
+  }
+
+  ngOnInit() {
+    this.webSocketService.getEndGameRedirect();
   }
 }
