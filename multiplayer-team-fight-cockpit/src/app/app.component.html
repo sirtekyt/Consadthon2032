@@ -8,17 +8,17 @@
 
 <!-- Team progress section -->
 <div class="container">
-  <div class="flex justify-between items-center">
+  <div class="team-progress">
     <div class="text-lg font-medium">
       Team Progress:
     </div>
-    <div class="flex space-x-4">
-      <div *ngFor="let team of teams" class="relative">
-        <div class="w-24 h-8 bg-gray-200 rounded-full">
+    <div class="team-bar">
+      <div *ngFor="let team of teams" class="team-item">
+        <div class="progress-container">
           <!-- Progress bar -->
-          <div class="h-8 bg-blue-500 rounded-full" [style.width]="team.progress + '%'"></div>
+          <div class="progress-bar" [style.width]="team.progress + '%'"></div>
         </div>
-        <div class="absolute top-0 left-0 w-8 h-8 flex items-center justify-center">
+        <div class="team-name">
           <!-- Team name -->
           {{ team.name }}
         </div>
@@ -26,3 +26,4 @@
     </div>
   </div>
 </div>
+
