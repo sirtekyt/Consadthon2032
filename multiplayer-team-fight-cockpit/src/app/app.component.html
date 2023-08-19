@@ -16,6 +16,7 @@
   <p class="text-5xl">To jest wyścig! Kto pierwszy dojedzie do "mety" wygrywa!</p>
   <div class="button-container flex flex-row">
     <button class="btn btn-start" (click)="startGameBtn()">Start Game</button>
+    <button class="btn btn-reset" (click)="resetGameBtn()">Reset Game</button>
   </div>
   <div *ngFor="let team of teams" class="team-item">
     <div class="card">

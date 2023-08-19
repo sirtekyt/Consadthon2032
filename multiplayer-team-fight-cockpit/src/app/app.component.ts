@@ -36,6 +36,11 @@ export class AppComponent implements OnInit {
     this.socket.send(this.data);
   }
 
+  resetGameBtn() {
+    this.data.type = 'reset';
+    this.socket.send(this.data);
+  }
+
   ngOnInit() {
     this.socket.on('teamScoreUpdate', (data) => {
       const updatedTeam = this.teams.find((team) => team.id === data.teamId);

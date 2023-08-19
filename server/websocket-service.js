@@ -9,8 +9,14 @@ let teams = [];
 
 io.on('connection', (socket) => {
     console.log('a player connected');
+    console.log("Connected: " + players.length);
 
     socket.on('message', (message) => {
+        if(message && message.type === 'reset') {
+            this.teams = [];
+            this.players = [];
+        }
+
         if (message && message.type === 'joinTeam') {
             console.log(message.team.id);
             let teamId = message.team.id;
