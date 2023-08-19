@@ -2,38 +2,29 @@ const app = require('express')();
 const http = require('http').createServer(app);
 // const { TeamsList } = require('./team-list');
 const io = require('socket.io')(http, {
-    cors: { origin: "*" }
+    cors: {origin: "*"}
 });
 
 let players = [];
-let playersScores = [
-
-];
-let teams = {}; // Object to hold teams and their scores
-let userClickCount = 0;
+let teams = {};
 
 io.on('connection', (socket) => {
     console.log('a player connected');
-    // Add the connected player to the list
-    // Send the updated list of players to all clients
-    socket.on('message', (message) => {
-        // console.log(message);
-        // console.log(message.team.id);
-        // console.log('players connected:', players.length)
 
+    socket.on('message', (message) => {
         if (message && message.type === 'joinTeam') {
             console.log(message.team.id);
             let teamId = message.team.id;
-            const { username, team} = message;
+            const {username, team} = message;
 
             // Check if the player is already connected
             const existingPlayer = players.find(player => player.socketId === socket.id);
             if (!existingPlayer) {
-                players.push({ socketId: socket.id, username, teamId: team.id});
+                players.push({socketId: socket.id, username, teamId: team.id});
             }
 
             if (!teams[teamId]) {
-                teams[teamId] = { score: 0, players: [] };
+                teams[teamId] = {score: 0, players: []};
             }
 
             // Remove the player from any previous team
@@ -41,23 +32,22 @@ io.on('connection', (socket) => {
                 teams[existingTeam].players = teams[existingTeam].players.filter(player => player.socketId !== socket.id);
             }
 
-            teams[teamId].players.push({ socketId: socket.id, username });
+            teams[teamId].players.push({socketId: socket.id, username});
             console.log(teams[teamId].players);
 
-            socket.emit('startGame', { msg: "Przekierowanie do lobby", result: 1 });
+            socket.emit('startGame', {msg: "Przekierowanie do lobby", result: 1});
         }
 
         // jezeli admin (cockpit)
         if (message && message.type === 'gameStart') {
             const teamId = message.teamId;
-            io.emit('gameStart', { msg: "Gra się rozpoczyna", result: 2, teamId: teamId });
+            io.emit('gameStart', {msg: "Gra się rozpoczyna", result: 2, teamId: teamId});
         }
 
         if (message && message.type === 'click' && message.msg === 'gameStart') {
             const team = message.team;
-            if (teams[team]) {
-                teams[team].score++;
-                console.log(teams[team].score)
+            if (teams[team.id]) {
+                teams[team.id].score += 10;
             }
             // wysylamy update tylko cockpit wiec socket a nie io
             io.emit('teamScoreUpdate', teams);
@@ -75,45 +65,4 @@ io.on('connection', (socket) => {
     });
 });
 
-http.listen(6969, () => console.log('listening on http://localhost:6969') );
-
-// // Zegar
-// let timerInterval = null;
-// let remainingTime = 30; // Initial time in seconds
-//
-// function startTimer() {
-//     timerInterval = setInterval(() => {
-//         remainingTime--;
-//
-//         if (remainingTime <= 0) {
-//             clearInterval(timerInterval);
-//             io.emit('timerExpired', { msg: "Czas minął!" });
-//         } else {
-//             io.emit('timerUpdate', { time: remainingTime });
-//         }
-//     }, 1000);
-// }
-//
-// function stopTimer() {
-//     clearInterval(timerInterval);
-//     remainingTime = 30; // Reset the timer
-// }
-//
-// io.on('connection', (socket) => {
-//     console.log('a player connected');
-//
-//     socket.on('message', (message) => {
-//         console.log(message);
-//
-//         if (message && message.type === 'startTimer') {
-//             startTimer();
-//         } else if (message && message.type === 'stopTimer') {
-//             stopTimer();
-//         }
-//     });
-//
-//     socket.on('disconnect', () => {
-//         console.log('a player disconnected');
-//         stopTimer(); // Stop the timer when a player disconnects
-//     });
-// });
+http.listen(6969, () => console.log('listening on http://localhost:6969'));
