@@ -7,14 +7,18 @@ const io = require('socket.io')(http, {
 let players = [];
 let teams = [];
 
+function resetGame() {
+    players = []
+    teams = []
+}
+
 io.on('connection', (socket) => {
     console.log('a player connected');
     console.log("Connected: " + players.length);
 
     socket.on('message', (message) => {
         if(message && message.type === 'reset') {
-            this.teams = [];
-            this.players = [];
+            resetGame();
         }
 
         if (message && message.type === 'joinTeam') {
