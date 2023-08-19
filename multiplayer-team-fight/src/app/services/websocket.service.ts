@@ -32,10 +32,10 @@ export class WebsocketService {
   }
 
   getNewPlayersForLobby() {
-    this.socket.on('updatePlayers', (result) => {
+    return this.socket.on('updatePlayers', (result) => {
 
-      console.log(result);
-
+      // TODO: lobby players view
+      // this.items$.subscribe(items => this.itemsPool.push(result));
     });
   }
 
