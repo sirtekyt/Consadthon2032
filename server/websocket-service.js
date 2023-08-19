@@ -1,6 +1,5 @@
 const app = require('express')();
 const http = require('http').createServer(app);
-// const { TeamsList } = require('./team-list');
 const io = require('socket.io')(http, {
     cors: {origin: "*"}
 });
@@ -8,12 +7,16 @@ const io = require('socket.io')(http, {
 let players = [];
 let teams = [];
 
-let totalGameScore = 0;
-
 io.on('connection', (socket) => {
     console.log('a player connected');
+    console.log("Connected: " + players.length);
 
     socket.on('message', (message) => {
+        if(message && message.type === 'reset') {
+            this.teams = [];
+            this.players = [];
+        }
+
         if (message && message.type === 'joinTeam') {
             console.log(message.team.id);
             let teamId = message.team.id;
