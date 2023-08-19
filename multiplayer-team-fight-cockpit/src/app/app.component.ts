@@ -70,10 +70,11 @@ export class AppComponent implements OnInit {
       const teamIdToUpdate = data.length - 1;
       const updatedTeam = this.teams.find((team) => team.id === teamIdToUpdate);
 
-      console.log(updatedTeam);
       if (updatedTeam) {
         // Update the team's progress
+        updatedTeam.progress = data[teamIdToUpdate].score;
         this.progressBarValue = updatedTeam.progress;
+        console.log(updatedTeam);
       }
     });
   }

@@ -6,18 +6,18 @@ export interface TeamParam {
 }
 
 export const TeamsList = [
-  { id: 1, name: "Tarczowniki"},
-  { id: 2, name: "Orki" },
-  { id: 3, name: "Komando" },
-  { id: 4, name: "Ants" },
-  { id: 5, name: "Gwiezda Flota" },
-  { id: 6, name: "Bizony" },
-  { id: 7, name: "Sharks" },
-  { id: 8, name: "Osy" },
-  { id: 9, name: "Koale" },
-  { id: 10, name: "Avengers" },
-  { id: 11, name: "Piranie" },
-  { id: 12, name: "Inne / Hr, Administracja, Admini etc, 😇" },
+  {id: 0, name: "Tarczowniki"},
+  {id: 1, name: "Orki"},
+  {id: 2, name: "Komando"},
+  {id: 3, name: "Ants"},
+  {id: 4, name: "Gwiezda Flota"},
+  {id: 5, name: "Bizony"},
+  {id: 6, name: "Sharks"},
+  {id: 7, name: "Osy"},
+  {id: 8, name: "Koale"},
+  {id: 9, name: "Avengers"},
+  {id: 10, name: "Piranie"},
+  {id: 11, name: "Inne / Hr, Administracja, Admini etc, 😇"}
 ];
 
 export const Teams: TeamParam[] = TeamsList.map((team) => ({
